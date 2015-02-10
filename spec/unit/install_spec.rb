@@ -11,4 +11,11 @@ describe 'pg_monz::default' do
       checksum: "c2a75f98cce6a467351db6f30c4b7595d05752c0a9940c4c1440fe86d240bef6"
     )
   end
+  
+  it 'extracts the package from the file cache' do
+    expect(chef_run).to run_bash('expand').with(
+      code: 'tar -xvf pg_monz.tar.gz',
+      cwd:  Chef::Config[:file_cache_path]
+    )
+  end
 end

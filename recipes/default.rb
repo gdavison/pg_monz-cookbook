@@ -11,3 +11,8 @@ remote_file "#{Chef::Config[:file_cache_path]}/pg_monz.tar.gz" do
   source   "https://github.com/pg-monz/pg_monz/archive/#{node['pg_monz']['version']}.tar.gz"
   checksum node['pg_monz']['sha256']
 end
+
+bash "expand" do
+  code "tar -xvf pg_monz.tar.gz"
+  cwd  Chef::Config[:file_cache_path]
+end
