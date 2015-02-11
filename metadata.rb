@@ -7,3 +7,4 @@ long_description 'Installs/Configures pg_monz'
 
 version          '0.1.0'
 
+depends 'zabbix-agent', '~> 0.10.0'
