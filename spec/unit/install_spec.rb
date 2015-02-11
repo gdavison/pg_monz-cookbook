@@ -24,4 +24,12 @@ describe 'pg_monz::default' do
       code: "cp #{Chef::Config[:file_cache_path]}/pg_monz/pg_monz/userparameter_pgsql.conf /etc/zabbix/zabbix_agentd.d/"
     )
   end
+
+  ['find_dbname.sh', 'find_dbname_table.sh'].each do |script_name|
+    it "copies #{script_name} into place" do
+      expect(chef_run).to run_bash("install #{script_name}").with(
+        code: "cp #{Chef::Config[:file_cache_path]}/pg_monz/pg_monz/#{script_name} /usr/local/bin/"
+      )
+    end
+  end
 end

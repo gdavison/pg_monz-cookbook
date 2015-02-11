@@ -20,3 +20,9 @@ end
 bash 'install user parameter config' do
   code  "cp #{Chef::Config[:file_cache_path]}/pg_monz/pg_monz/userparameter_pgsql.conf #{node['zabbix']['agent']['include_dir']}/"
 end
+
+['find_dbname.sh', 'find_dbname_table.sh'].each do |script_name|
+  bash "install #{script_name}" do
+    code "cp #{Chef::Config[:file_cache_path]}/pg_monz/pg_monz/#{script_name} /usr/local/bin/"
+  end
+end
