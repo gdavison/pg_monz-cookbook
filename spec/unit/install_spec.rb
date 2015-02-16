@@ -2,8 +2,12 @@ require 'spec_helper'
 
 pg_monz_version = "1.0.1"
 
-describe 'pg_monz::default' do
-  let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+describe 'pg_monz::install' do
+  let(:chef_run) do
+    ChefSpec::SoloRunner.new do |node|
+      node.set['postgresql']['config']['port'] = 1234
+    end.converge(described_recipe)
+  end
 
   it 'downloads pg_monz to the file cache' do
     expect(chef_run).to create_remote_file("#{Chef::Config[:file_cache_path]}/pg_monz.tar.gz").with(
