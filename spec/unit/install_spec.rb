@@ -16,13 +16,6 @@ describe 'pg_monz::install' do
     )
   end
   
-  it 'extracts the package from the file cache' do
-    expect(chef_run).to run_bash('expand').with(
-      code: "tar -xvf pg_monz.tar.gz -C #{Chef::Config[:file_cache_path]}/pg_monz/",
-      cwd:  Chef::Config[:file_cache_path]
-    )
-  end
-
   context 'the User Parameter Config file' do
     it 'is copied into place' do
       expect(chef_run).to run_bash('install user parameter config').with(
