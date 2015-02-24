@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'postgresql::server'
+include_recipe 'zabbix-agent::default'
 
 # reload the passwd file to make sure we have any added users
 ohai 'reload_passwd' do
@@ -15,10 +15,19 @@ ohai 'reload_passwd' do
   plugin 'etc'
 end
 
-user = node['zabbix']['agent']['user']
-home = node['etc']['passwd']['zabbix']['dir']
-template "#{home}/.pgpass" do
+# ensure the zabbix has a user directory
+directory 'zabbix user' do
+  path  lazy { node['etc']['passwd']['zabbix']['dir'] }
+  #path  zabbix_home
+  owner node['zabbix']['agent']['user']
+  group node['zabbix']['agent']['group']
+end
+
+template 'zabbix user .pgpass' do
   source 'pgpass.erb'
+  path   lazy { "#{node['etc']['passwd']['zabbix']['dir']}/.pgpass" }
+  owner  node['zabbix']['agent']['user']
+  group  node['zabbix']['agent']['group']
   mode   '0600'
   action :create
 end
