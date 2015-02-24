@@ -20,14 +20,22 @@ bash 'expand' do
   cwd  Chef::Config[:file_cache_path]
 end
 
-bash 'install user parameter config' do
-  code     "cp #{Chef::Config[:file_cache_path]}/#{expand_destination}/pg_monz/userparameter_pgsql.conf #{node['zabbix']['agent']['include_dir']}/"
+file 'install user parameter config' do
+  path     "#{node['zabbix']['agent']['include_dir']}/userparameter_pgsql.conf"
+  owner    node['zabbix']['agent']['user']
+  group    node['zabbix']['agent']['group']
+  mode     '644'
+  content  lazy { ::File.open("#{Chef::Config[:file_cache_path]}/#{expand_destination}/pg_monz/userparameter_pgsql.conf").read }
   notifies :restart, 'service[zabbix-agent]'
 end
 
 ['find_dbname.sh', 'find_dbname_table.sh'].each do |script_name|
-  bash "install #{script_name}" do
-    code     "cp #{Chef::Config[:file_cache_path]}/#{expand_destination}/pg_monz/#{script_name} /usr/local/bin/"
+  file "install #{script_name}" do
+    path     "/usr/local/bin/#{script_name}"
+    owner    node['zabbix']['agent']['user']
+    group    node['zabbix']['agent']['group']
+    mode     '755'
+    content  lazy { ::File.open("#{Chef::Config[:file_cache_path]}/#{expand_destination}/pg_monz/#{script_name}").read }
     notifies :restart, 'service[zabbix-agent]'
   end
 end

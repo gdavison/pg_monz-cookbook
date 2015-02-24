@@ -17,27 +17,15 @@ describe 'pg_monz::install' do
   end
   
   context 'the User Parameter Config file' do
-    it 'is copied into place' do
-      expect(chef_run).to run_bash('install user parameter config').with(
-        code: "cp #{Chef::Config[:file_cache_path]}/pg_monz/pg_monz/userparameter_pgsql.conf /etc/zabbix/zabbix_agentd.d/"
-      )
-    end
-    let(:bash_command) { chef_run.bash('install user parameter config') }
     it 'restarts the zabbix service' do
-      expect(bash_command).to notify('service[zabbix-agent]').to(:restart)
+      expect(chef_run.file('install user parameter config')).to notify('service[zabbix-agent]').to(:restart)
     end
   end
 
   ['find_dbname.sh', 'find_dbname_table.sh'].each do |script_name|
     context "the discovery script #{script_name}" do
-      it 'is copied into place' do
-        expect(chef_run).to run_bash("install #{script_name}").with(
-          code: "cp #{Chef::Config[:file_cache_path]}/pg_monz/pg_monz/#{script_name} /usr/local/bin/"
-        )
-      end
-      let(:bash_command) { chef_run.bash("install #{script_name}") }
       it 'restarts the zabbix service' do
-        expect(bash_command).to notify('service[zabbix-agent]').to(:restart)
+        expect(chef_run.file("install #{script_name}")).to notify('service[zabbix-agent]').to(:restart)
       end
     end
   end
