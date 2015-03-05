@@ -16,7 +16,7 @@ end
 
 expand_destination = 'pg_monz'
 bash 'expand' do
-  code "mkdir #{expand_destination} && tar -xvf pg_monz.tar.gz --directory #{Chef::Config[:file_cache_path]}/#{expand_destination}/ --strip-components=1"
+  code "rm --force --recursive #{expand_destination} && mkdir #{expand_destination} && tar -xvf pg_monz.tar.gz --directory #{Chef::Config[:file_cache_path]}/#{expand_destination}/ --strip-components=1"
   cwd  Chef::Config[:file_cache_path]
 end
 
