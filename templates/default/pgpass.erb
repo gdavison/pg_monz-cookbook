@@ -1,1 +1,1 @@
-<%= node['pg_monz']['hostname'] %>:<%= node['pg_monz']['postgres_port'] %>:<%= node['pg_monz']['database'] %>:<%= node['pg_monz']['username'] %>:<%= node['pg_monz']['password'] %>
+<%= node['pg_monz']['hostname'] %>:<%= node['pg_monz']['postgres_port'] %>:<%= node['pg_monz']['database'] %>:<%= node['pg_monz']['username'] %>:<%= node['postgresql']['password'][node['pg_monz']['username']] %>
