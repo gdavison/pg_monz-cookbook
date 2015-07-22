@@ -5,5 +5,5 @@ long_description 'Installs/Configures pg_monz'
 
 version          '0.1.1'
 
-depends 'postgresql',   '~> 3.4.14'
-depends 'zabbix-agent', '~> 0.10.0'
+depends 'postgresql',   '~> 3.4'
+depends 'zabbix-agent', '~> 0.10'
