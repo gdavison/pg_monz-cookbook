@@ -49,11 +49,11 @@ The easiest way to use this cookbook is to call the `pg_monz::default` recipe, w
 
 ## Recipes
 
-### `default`
+### pg_monz::default
 The default recipe downloads and installs `pg_monz`, then adds a `.pgpass` file to allow the zabbix user to access the PostgreSQL database.
 
-### `install`
+### pg_monz::install
 Downloads and installs `pg_monz`
 
-### `zabbix_user`
+### pg\_monz::zabbix\_user
 Adds the `.pgpass` file to allow the zabbix user
