@@ -1,4 +1,6 @@
 name             'pg_monz'
+maintainer       'Graham Davison'
+maintainer_email 'gdavison@paybyphone.com'
 license          'Apache v2.0'
 description      'Installs/Configures pg_monz'
 long_description 'Installs/Configures pg_monz'
