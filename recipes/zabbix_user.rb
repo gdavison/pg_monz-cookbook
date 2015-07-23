@@ -18,7 +18,6 @@ end
 # ensure the zabbix has a user directory
 directory 'zabbix user' do
   path  lazy { node['etc']['passwd']['zabbix']['dir'] }
-  #path  zabbix_home
   owner node['zabbix']['agent']['user']
   group node['zabbix']['agent']['group']
 end
