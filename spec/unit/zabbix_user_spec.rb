@@ -16,7 +16,7 @@ describe 'pg_monz::zabbix_user' do
       node.set['pg_monz']['postgres_port'] = port
       node.set['pg_monz']['database']      = database
       node.set['pg_monz']['username']      = username
-      node.set['pg_monz']['password']      = password
+      node.set['postgresql']['password'][username]   = password
       node.set['postgresql']['password']['postgres'] = 'foobar'
       node.set['postgresql']['config']['port']       = 5432
     end.converge(described_recipe)
