@@ -8,6 +8,7 @@ This cookbook installs [pg_monz](http://pg-monz.github.io/pg_monz/index-en.html)
 The easiest way to use this cookbook is to call the `pg_monz::default` recipe, which calls the other recipes.
 
 ## Attributes
+
 <table>
   <tr>
     <th>Key</th>
@@ -57,3 +58,9 @@ Downloads and installs `pg_monz`
 
 ### pg\_monz::zabbix\_user
 Adds the `.pgpass` file to allow the zabbix user
+
+## Publishing
+This cookbook uses [stove](https://github.com/sethvargo/stove) to publish to [supermarket](https://supermarket.chef.io/cookbooks/pg_monz).
+
+1. Update the version in [`metadata.rb`](metadata.rb)
+1. Run `bundle exec rake publish`
